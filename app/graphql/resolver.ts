@@ -1,23 +1,43 @@
 import { UserType } from "../API";
 
-const fakeDatabase = {
-  a: {
-    userId: "a",
-    username: "alice",
-  },
-  b: {
-    userId: "b",
-    username: "bob",
-  },
-} as Record<string, UserType>
+export const rootResolver = (c: any) => {
+  const getUser = async ({ userId }: UserType) => {
+    const { results } = await c.env.DB.prepare(
+      `SELECT * FROM user WHERE userId = ?`
+    )
+      .bind(userId)
+      .run();
+    console.log(results);
+    return results[0];
+  };
 
-export const rootResolver = (_ctx: unknown) => {
+  const listUsers = async ({ limit = -1 }: { limit: number }) => {
+    const { results } = await c.env.DB.prepare(`SELECT * FROM user LIMIT ?`)
+      .bind(limit)
+      .run();
+    return results;
+  };
+
+  const getPost = async ({ postId }: { postId: string }) => {
+    const { results } = await c.env.DB.prepare(
+      `SELECT * FROM post WHERE postId = ?`
+    )
+      .bind(postId)
+      .run();
+    return results[0];
+  };
+
+  const listPosts = async ({ limit = -1 }: { limit: number }) => {
+    const { results } = await c.env.DB.prepare(`SELECT * FROM post LIMIT ?`)
+      .bind(limit)
+      .run();
+    return results;
+  };
+
   return {
-    getUser({ userId }: UserType) {
-      return new UserType(fakeDatabase[userId]);
-    },
-    listUsers() {
-      return Object.values(fakeDatabase).map((user: UserType) => new UserType(user));
-    },
+    getUser,
+    listUsers,
+    getPost,
+    listPosts,
   };
 };

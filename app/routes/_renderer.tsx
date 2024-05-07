@@ -12,6 +12,11 @@ export default reactRenderer(({ children, title }) => {
         ) : (
           <script type="module" src="/app/client.ts"></script>
         )}
+        {(import.meta as any).env.PROD ? (
+          <link rel="stylesheet" href="/static/style.css" />
+        ) : (
+          <link rel="stylesheet" href="/app/style.css" />
+        )}
         {title ? <title>{title}</title> : ""}
       </head>
       <body>{children}</body>

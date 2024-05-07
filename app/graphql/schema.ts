@@ -1,25 +1,24 @@
 export const typeDefs = /* GraphQL */ `
-input CreateUserInput {
-  userId: ID!
-  username: String
-}
+  type User {
+    userId: ID!
+    username: String
+    createdAt: String
+    updatedAt: String
+  }
 
-input UpdateUserInput {
-  userId: ID!
-  username: String
-}
+  type Post {
+    postId: ID!
+    userId: ID!
+    parent: ID
+    content: String
+    createdAt: String
+    updatedAt: String
+  }
 
-input DeleteUserInput {
-  userId: ID!
-}
-
-type User {
-  userId: ID!
-  username: String
-}
-
-type Query {
-  getUser(userId: ID!): User
-  listUsers(limit: Int): [User]
-}
+  type Query {
+    getUser(userId: ID!): User
+    listUsers(limit: Int): [User]
+    getPost(postId: ID!): Post
+    listPosts(limit: Int): [Post]
+  }
 `;

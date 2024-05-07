@@ -1,0 +1,8 @@
+/* app/style.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: #e2e2e2;
+}

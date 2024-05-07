@@ -5,20 +5,23 @@
     "dev": "vite",
     "build": "vite build --mode client && vite build",
     "preview": "wrangler pages dev ./dist",
-    "deploy": "$npm_execpath run build && wrangler pages deploy ./dist"
+    "deploy": "$npm_execpath run build && wrangler pages deploy ./dist",
+    "d1:create": "npx wrangler d1 create hono-graphql-d1",
+    "d1:import": "npx wrangler d1 execute hono-graphql-d1 --local --file=./app/database/dump.sql",
+    "d1:select": "npx wrangler d1 execute hono-graphql-d1 --local --command='SELECT * FROM post'"
   },
   "private": true,
   "dependencies": {
     "@hono/graphql-server": "^0.4.3",
     "@hono/react-renderer": "0.2.0",
-    "@types/react": "^18.3.1",
-    "@types/react-dom": "^18.3.0",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
     "autoprefixer": "^10.4.19",
     "hono": "^4.3.2",
     "honox": "0.1.16",
     "postcss": "^8.4.38",
-    "react": "18",
-    "react-dom": "18",
+    "react": "next",
+    "react-dom": "next",
     "tailwindcss": "^3.4.3"
   },
   "devDependencies": {

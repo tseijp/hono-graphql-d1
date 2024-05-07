@@ -8,10 +8,28 @@ export const getUser = /* GraphQL */ `
 `;
 
 export const listUsers = /* GraphQL */ `
-  query ListUsers {
-    listUsers {
+  query ListUsers($limit: Int) {
+    listUsers(limit: $limit) {
       userId
       username
+    }
+  }
+`;
+
+export const getPost = /* GraphQL */ `
+  query GetPost($postId: ID!) {
+    getPost(postId: $postId) {
+      postId
+      userId
+    }
+  }
+`;
+
+export const listPosts = /* GraphQL */ `
+  query ListPosts($limit: Int) {
+    listPosts(limit: $limit) {
+      postId
+      userId
     }
   }
 `;

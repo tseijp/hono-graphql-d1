@@ -1,22 +1,22 @@
-export type CreateUserInput = {
+export interface UserType {
+  userId: string;
   username: string;
-};
-
-export type UpdateUserInput = {
-  userId: ID;
-  username: string;
-};
-
-export type DeleteUserInput = {
-  userId: ID;
-};
+}
 
 export class UserType {
-  userId: ID;
-  username: string;
+  constructor(constructor: UserType) {
+    Object.assign(this, constructor);
+  }
+}
 
-  constructor({ userId, username }: UserType) {
-    this.userId = userId;
-    this.username = username;
+export interface PostType {
+  postId: string;
+  userId: string;
+  title: string;
+  content: string;
+}
+export class PostType {
+  constructor(constructor: PostType) {
+    Object.assign(this, constructor);
   }
 }
